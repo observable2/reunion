@@ -16,8 +16,7 @@ which this project tracks at the tip of its default branch.
 - `nbks/custom.tmpl` — page template (colours, font, spel styles)
 - `nbks/data/config.js` — playback settings (times in milliseconds)
 - `nbks/data/` — `spels.json`, `paras.json` and `scores.json`; `reunion_tstamps.json` (word timings from the
-  recording, in seconds) is the source of `scores.json`; `spanString.txt` and `scratch.json` are kept from the
-  Framework version but unused
+  recording, in seconds) is the source of `scores.json`
 - `tools/build-scores.mjs` — regenerates `nbks/data/scores.json` (one score per paragraph, pauses in
   milliseconds) from the timestamps and checks every id against `spels.json` and `paras.json`
 
