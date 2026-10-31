@@ -1,53 +1,28 @@
-# Crawl It’s Image
+# Reunion
 
-This is an [Observable Framework](https://observablehq.com/framework) project. To start the local preview server, run:
+An Observable Notebook Kit project (converted from Observable Framework).
+Playback uses the shared engine
+[observable2/scoringthespeltair](https://github.com/observable2/scoringthespeltair),
+which this project tracks at the tip of its default branch.
 
-```
-npm run dev
-```
+## Commands
 
-Then visit <http://localhost:3000> to preview your project.
+- `npm run preview` — local preview at http://localhost:5173
+- `npm run build` — build to `./dist`
 
-For more, see <https://observablehq.com/framework/getting-started>.
+## Layout
 
-## Project structure
+- `nbks/index.html` — the notebook: loads the data and plays it with the engine
+- `nbks/custom.tmpl` — page template (colours, font, spel styles)
+- `nbks/data/config.js` — playback settings (times in milliseconds)
+- `nbks/data/` — `spels.json`, `paras.json` and `scores.json`; `reunion_tstamps.json` (word timings from the
+  recording, in seconds) is the source of `scores.json`; `spanString.txt` and `scratch.json` are kept from the
+  Framework version but unused
+- `tools/build-scores.mjs` — regenerates `nbks/data/scores.json` (one score per paragraph, pauses in
+  milliseconds) from the timestamps and checks every id against `spels.json` and `paras.json`
 
-A typical Framework project looks like this:
+## Working with the engine
 
-```ini
-.
-├─ src
-│  ├─ components
-│  │  └─ timeline.js           # an importable module
-│  ├─ data
-│  │  ├─ launches.csv.js       # a data loader
-│  │  └─ events.json           # a static data file
-│  ├─ example-dashboard.md     # a page
-│  ├─ example-report.md        # another page
-│  └─ index.md                 # the home page
-├─ .gitignore
-├─ observablehq.config.js      # the project config file
-├─ package.json
-└─ README.md
-```
-
-**`src`** - This is the “source root” — where your source files live. Pages go here. Each page is a Markdown file. Observable Framework uses [file-based routing](https://observablehq.com/framework/routing), which means that the name of the file controls where the page is served. You can create as many pages as you like. Use folders to organize your pages.
-
-**`src/index.md`** - This is the home page for your site. You can have as many additional pages as you’d like, but you should always have a home page, too.
-
-**`src/data`** - You can put [data loaders](https://observablehq.com/framework/loaders) or static data files anywhere in your source root, but we recommend putting them here.
-
-**`src/components`** - You can put shared [JavaScript modules](https://observablehq.com/framework/javascript/imports) anywhere in your source root, but we recommend putting them here. This helps you pull code out of Markdown files and into JavaScript modules, making it easier to reuse code across pages, write tests and run linters, and even share code with vanilla web applications.
-
-**`observablehq.config.js`** - This is the [project configuration](https://observablehq.com/framework/config) file, such as the pages and sections in the sidebar navigation, and the project’s title.
-
-## Command reference
-
-| Command           | Description                                              |
-| ----------------- | -------------------------------------------------------- |
-| `npm install`            | Install or reinstall dependencies                        |
-| `npm run dev`        | Start local preview server                               |
-| `npm run build`      | Build your static site, generating `./dist`              |
-| `npm run deploy`     | Deploy your project to Observable                        |
-| `npm run clean`      | Clear the local data loader cache                        |
-| `npm run observable` | Run commands like `observable help`                      |
+`package.json` depends on `github:observable2/scoringthespeltair` (no tag).
+`package-lock.json` pins the exact commit, so **nothing updates until you ask it to**:
+commit and push the engine, then run `npm update scoringthespeltair` here and commit the lockfile.

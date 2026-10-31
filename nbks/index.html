@@ -1,0 +1,40 @@
+<!doctype html>
+<notebook theme="midnight">
+  <title>Reunion</title>
+  <script id="2" type="text/markdown" hidden="">
+    # Reunion
+  </script>
+  <script id="1" type="text/html">
+    <div id="field"></div>
+    <div id="byline">
+      <cite>Steep 2024 • 1974 &nbsp;&nbsp;&nbsp; Reunion</cite><br>
+      <span style="font-size: 1.2vw;">John C.</span>
+    </div>
+  </script>
+  <script id="3" type="module">
+    console.log("--- Reunion July 2024 v2.0 ---");
+
+    // Wait for the DOM to be ready before querying elements
+    await new Promise(resolve => requestAnimationFrame(resolve));
+
+    const { config } = await import("./data/config.js");
+    // --- DEBUG configuration
+    // config.startingPoint = 1; // DEBUG: start at a later paragraph
+    // config.running = false; // DEBUG
+    const fieldElem = document.getElementById("field");
+    // --- preprocessing ---
+    console.log("--- preprocessing begins ---"); // DEBUG
+    const spels = new Map(await FileAttachment("./data/spels.json").json());
+    fieldElem.innerHTML = Array.from(spels.values())
+      .map((spel) => spel.html)
+      .join("");
+    const paras = await FileAttachment("./data/paras.json").json();
+    // scores (milliseconds) are generated from reunion_tstamps.json by tools/build-scores.mjs
+    const scores = await FileAttachment("./data/scores.json").json();
+    console.log("--- preprocessing done ---"); // DEBUG
+
+    const { centerField, play } = await import("scoringthespeltair");
+    centerField(fieldElem);
+    if (config.running) play(config, fieldElem, spels, paras, scores);
+  </script>
+</notebook>
