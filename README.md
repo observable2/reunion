@@ -22,6 +22,9 @@ which this project tracks at the tip of its default branch.
 
 ## Working with the engine
 
-`package.json` depends on `github:observable2/scoringthespeltair` (no tag).
-`package-lock.json` pins the exact commit, so **nothing updates until you ask it to**:
-commit and push the engine, then run `npm update scoringthespeltair` here and commit the lockfile.
+`package.json` depends on `github:observable2/scoringthespeltair#vX.Y.Z`, a tagged release;
+`package-lock.json` pins the commit, so nothing updates until you bump the tag. To bump, push the engine tag,
+then run `node node_modules/scoringthespeltair/scripts/bump.js vX.Y.Z` in this folder (`--dry` previews).
+Do not use plain `npm install` or `npm update` for this: inside the `scored-air` workspace they update the
+shared root lockfile, not this project's own, which is the one the deploy builds from.
+Commit `package.json` and `package-lock.json`.
