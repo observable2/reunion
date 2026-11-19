@@ -17,7 +17,7 @@ which this project tracks at the tip of its default branch.
 - `nbks/data/config.js` — playback settings (times in milliseconds)
 - `nbks/data/` — `spels.json`, `paras.json` and `scores.json`; `reunion_tstamps.json` (word timings from the
   recording, in seconds) is the source of `scores.json`
-- `tools/build-scores.mjs` — regenerates `nbks/data/scores.json` (one score per paragraph, pauses in
+- `tools/build-scores.mjs` — regenerates `nbks/data/scores.json` (one score per paragraph, durations in
   milliseconds) from the timestamps and checks every id against `spels.json` and `paras.json`
 
 ## Working with the engine
