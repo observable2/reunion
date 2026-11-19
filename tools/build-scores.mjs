@@ -1,11 +1,12 @@
-// Builds nbks/data/scores.json (one score per paragraph, durations in milliseconds) from the
-// alignment timestamps in nbks/data/reunion_tstamps.json (word, start, end in seconds).
+// Builds nbks/data/scores.json (one score per paragraph, durations
+// in milliseconds) from the alignment timestamps in
+// nbks/data/reunion_tstamps.json (word, start, end in seconds).
 // Run: node tools/build-scores.mjs
 //
-// Same rule as the Framework version's alignedSpels() and the engine's convention: a spel's
-// duration is the time from its start to the start of the next word (to its own end for the last
-// word of a paragraph). Spel ids are the word plus a serial number running through the work,
-// and every id is checked against spels.json and paras.json.
+// A spel's duration is the time from its start to the start of the
+// next word (to its own end for the last word of a paragraph). Spel
+// ids are the word plus a serial number running through the work;
+// every id is checked against spels.json and paras.json.
 import { readFileSync, writeFileSync } from "node:fs";
 
 const dir = new URL("../nbks/data/", import.meta.url);

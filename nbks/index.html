@@ -14,7 +14,7 @@
   <script id="3" type="module">
     console.log("--- Reunion July 2024 v2.0 ---");
 
-    // Wait for the DOM to be ready before querying elements
+    // wait for the DOM before querying elements
     await new Promise(resolve => requestAnimationFrame(resolve));
 
     const { config } = await import("./data/config.js");
@@ -29,7 +29,7 @@
       .map((spel) => spel.html)
       .join("");
     const paras = await FileAttachment("./data/paras.json").json();
-    // scores (milliseconds) are generated from reunion_tstamps.json by tools/build-scores.mjs
+    // generated from reunion_tstamps.json by tools/build-scores.mjs
     const scores = await FileAttachment("./data/scores.json").json();
     console.log("--- preprocessing done ---"); // DEBUG
 
